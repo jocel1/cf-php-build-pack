@@ -53,10 +53,8 @@ class XhprofInstaller(object):
 
     def _load_xhprof_info(self):
         xhprof_so_name = 'xhprof-%s.so' % (self._php_api)
-        self.xhprof_so = os.path.join('@{HOME}', 'xhprof',
-                                        'module', self._php_arch,
-                                        xhprof_so_name)
-        self._log.debug("PHP Extension [%s]", self.xhprof_so)
+        self.xhprof_so = os.path.join('/tmp/staged/app/xhprof', xhprof_so_name)
+        self._log.info("PHP Extension [%s]", self.xhprof_so)
 
     def _load_php_info(self):
         self.php_ini_path = os.path.join(self._ctx['BUILD_DIR'],
@@ -64,7 +62,7 @@ class XhprofInstaller(object):
         self._php_extn_dir = self._find_php_extn_dir()
         self._php_api, self._php_zts = self._parse_php_api()
         self._php_arch = self._ctx.get('XHPROF_ARCH', 'x64')
-        self._log.debug("PHP API [%s] Arch [%s]",
+        self._log.info("PHP API [%s] Arch [%s]",
                         self._php_api, self._php_arch)
 
     def _find_php_extn_dir(self):
