@@ -19,7 +19,7 @@ Downloads, installs and configures the Xhprof extension for PHP
 import os
 import os.path
 import logging
-
+import shutil
 
 _log = logging.getLogger('xhprof')
 
@@ -54,6 +54,7 @@ class XhprofInstaller(object):
     def _load_xhprof_info(self):
         xhprof_so_name = 'xhprof-%s.so' % (self._php_api)
         self.xhprof_so = os.path.join('/tmp/staged/app/xhprof', xhprof_so_name)
+        shutil.copy2(self.xhprof_so, '@HOME/php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api))
         self._log.info("PHP Extension [%s]", self.xhprof_so)
 
     def _load_php_info(self):
