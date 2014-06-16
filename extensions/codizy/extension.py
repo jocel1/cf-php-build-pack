@@ -87,6 +87,7 @@ class CodizyInstaller(object):
             pos = lines.index(extns[-1]) + 1
         else:
             pos = lines.index('#{PHP_EXTENSIONS}\n') + 1
+        self._log.info("Inserting in %s pos %d : %s", self.php_ini_path, pos, self.codizy_so)
         lines.insert(pos, 'extension=%s\n' % self.codizy_so)
         lines.append('\n')
         with open(self.php_ini_path, 'wt') as php_ini:
