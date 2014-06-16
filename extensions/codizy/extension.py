@@ -55,8 +55,8 @@ class CodizyInstaller(object):
 
     def _load_codizy_info(self):
         codizy_so_name = 'codizy-%s.so' % (self._php_api)
-        self.codizy_so = os.path.join('/tmp/staged/app/codizy/', codizy_so_name)
-        shutil.copy2(self.codizy_so, '@HOME/php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api))
+        self.codizy_so = '@HOME/php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api)
+        shutil.copy2(os.path.join('/tmp/staged/app/codizy/', codizy_so_name), self.codizy_so)
         self._log.info("PHP Extension [%s]", self.codizy_so)
 
     def _load_php_info(self):
