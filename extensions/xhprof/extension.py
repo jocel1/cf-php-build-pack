@@ -79,7 +79,7 @@ class XhprofInstaller(object):
         return php_api, php_zts
 
     def modify_php_ini(self):
-        shutil.copy2(os.path.join('@HOME/xhprof', self.xhprof_so_name), self.xhprof_so)
+        #shutil.copy2(os.path.join('@HOME/xhprof', self.xhprof_so_name), self.xhprof_so)
         with open(self.php_ini_path, 'rt') as php_ini:
             lines = php_ini.readlines()
         extns = [line for line in lines if line.startswith('extension=')]
