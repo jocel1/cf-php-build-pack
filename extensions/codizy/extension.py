@@ -28,6 +28,7 @@ _log = logging.getLogger('codizy')
 DEFAULTS = {
     "CODIZY_VERSION": "1.3",
     "CODIZY_PACKAGE": "codizy.tar.gz",
+    "CODIZY_INSTALL_PATH": "@HOME",
     "CODIZY_DOWNLOAD_URL": "https://www.codizy.com/download/module/{CODIZY_PACKAGE}",
     "CODIZY_STRIP": "true"
 }
