@@ -53,7 +53,7 @@ class XhprofInstaller(object):
 
     def _load_xhprof_info(self):
         xhprof_so_name = 'xhprof-%s.so' % (self._php_api)
-        self.xhprof_so = '@HOME/php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api)
+        self.xhprof_so = os.path.join('@HOME/php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api), xhprof_so_name)
         shutil.copy2(os.path.join('/tmp/staged/app/xhprof', xhprof_so_name), self.xhprof_so)
         self._log.info("PHP Extension [%s]", self.xhprof_so)
 
