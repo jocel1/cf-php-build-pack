@@ -19,7 +19,6 @@ Downloads, installs and configures the Codizy extension for PHP
 import os
 import os.path
 import logging
-import shutil
 
 
 _log = logging.getLogger('codizy')
@@ -54,8 +53,9 @@ class CodizyInstaller(object):
                 self._ctx[key] = val
 
     def _load_codizy_info(self):
-        self.codizy_so_name = 'codizy-%s.so' % (self._php_api)
-        self.codizy_so = os.path.join(self._ctx['BUILD_DIR'], 'php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api), self.codizy_so_name)
+        codizy_so_name = 'codizy-%s.so' % (self._php_api)
+        self.codizy_so = os.path.join('@{HOME}', 'codizy',
+                                        codizy_so_name)
         self._log.info("PHP Extension [%s]", self.codizy_so)
 
     def _load_php_info(self):
@@ -81,7 +81,6 @@ class CodizyInstaller(object):
         return php_api, php_zts
 
     def modify_php_ini(self):
-        shutil.copy2(os.path.join(self._ctx['CODIZY_INSTALL_PATH'], self.codizy_so_name), self.codizy_so)
         with open(self.php_ini_path, 'rt') as php_ini:
             lines = php_ini.readlines()
         extns = [line for line in lines if line.startswith('extension=')]
@@ -89,7 +88,6 @@ class CodizyInstaller(object):
             pos = lines.index(extns[-1]) + 1
         else:
             pos = lines.index('#{PHP_EXTENSIONS}\n') + 1
-        self._log.info("Inserting in %s pos %d : %s", self.php_ini_path, pos, self.codizy_so)
         lines.insert(pos, 'extension=%s\n' % self.codizy_so)
         lines.append('\n')
         with open(self.php_ini_path, 'wt') as php_ini:
