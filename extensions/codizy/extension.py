@@ -28,7 +28,6 @@ _log = logging.getLogger('codizy')
 DEFAULTS = {
     "CODIZY_VERSION": "1.3",
     "CODIZY_PACKAGE": "codizy.tar.gz",
-    "CODIZY_INSTALL_PATH": "@HOME",
     "CODIZY_DOWNLOAD_URL": "https://www.codizy.com/download/module/{CODIZY_PACKAGE}",
     "CODIZY_STRIP": "true"
 }
@@ -56,7 +55,7 @@ class CodizyInstaller(object):
 
     def _load_codizy_info(self):
         self.codizy_so_name = 'codizy-%s.so' % (self._php_api)
-        self.codizy_so = os.path.join('@HOME/php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api), self.codizy_so_name)
+        self.codizy_so = os.path.join(self._ctx['BUILD_DIR'], 'php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api), self.codizy_so_name)
         self._log.info("PHP Extension [%s]", self.codizy_so)
 
     def _load_php_info(self):
@@ -82,7 +81,7 @@ class CodizyInstaller(object):
         return php_api, php_zts
 
     def modify_php_ini(self):
-        #shutil.copy2(os.path.join('@HOME/codizy', self.codizy_so_name), self.codizy_so)
+        shutil.copy2(os.path.join(self._ctx['BUILD_DIR'], 'codizy', self.codizy_so_name), self.codizy_so)
         with open(self.php_ini_path, 'rt') as php_ini:
             lines = php_ini.readlines()
         extns = [line for line in lines if line.startswith('extension=')]

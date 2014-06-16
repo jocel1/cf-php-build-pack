@@ -26,7 +26,6 @@ _log = logging.getLogger('xhprof')
 
 DEFAULTS = {
     "XHPROF_VERSION": "0.9.5",
-    "XHPROF_INSTALL_PATH": "@HOME",
     "XHPROF_PACKAGE": "xhprof.tar.gz",
     "XHPROF_DOWNLOAD_URL": "https://www.codizy.com/download/module/{XHPROF_PACKAGE}",
     "XHPROF_STRIP": "true"
@@ -54,7 +53,7 @@ class XhprofInstaller(object):
 
     def _load_xhprof_info(self):
         self.xhprof_so_name = 'xhprof-%s.so' % (self._php_api)
-        self.xhprof_so = os.path.join('@HOME/php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api), self.xhprof_so_name)
+        self.xhprof_so = os.path.join(self._ctx['BUILD_DIR'],'php/lib/php/extensions/no-debug-non-zts-%s' % (self._php_api), self.xhprof_so_name)
         self._log.info("PHP Extension [%s]", self.xhprof_so)
 
     def _load_php_info(self):
@@ -80,7 +79,7 @@ class XhprofInstaller(object):
         return php_api, php_zts
 
     def modify_php_ini(self):
-        #shutil.copy2(os.path.join('@HOME/xhprof', self.xhprof_so_name), self.xhprof_so)
+        shutil.copy2(os.path.join(self._ctx['BUILD_DIR'], 'xhprof', self.xhprof_so_name), self.xhprof_so)
         with open(self.php_ini_path, 'rt') as php_ini:
             lines = php_ini.readlines()
         extns = [line for line in lines if line.startswith('extension=')]
