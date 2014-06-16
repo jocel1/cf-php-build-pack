@@ -57,7 +57,7 @@ class CodizyInstaller(object):
         self.codizy_so = os.path.join('@{HOME}', 'codizy',
                                         'module', self._php_arch,
                                         codizy_so_name)
-        self._log.debug("PHP Extension [%s]", self.codizy_so)
+        self._log.info("PHP Extension [%s]", self.codizy_so)
 
     def _load_php_info(self):
         self.php_ini_path = os.path.join(self._ctx['BUILD_DIR'],
@@ -65,7 +65,7 @@ class CodizyInstaller(object):
         self._php_extn_dir = self._find_php_extn_dir()
         self._php_api, self._php_zts = self._parse_php_api()
         self._php_arch = self._ctx.get('CODIZY_ARCH', 'x64')
-        self._log.debug("PHP API [%s] Arch [%s]",
+        self._log.info("PHP API [%s] Arch [%s]",
                         self._php_api, self._php_arch)
 
     def _find_php_extn_dir(self):
