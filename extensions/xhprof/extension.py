@@ -25,7 +25,7 @@ _log = logging.getLogger('xhprof')
 
 DEFAULTS = {
     "XHPROF_VERSION": "0.9.5",
-    "XHPROF_PACKAGE": "xhprof.tar.gz",
+    "XHPROF_PACKAGE": "xhprof-{XHPROF_VERSION}.tar.gz",
     "XHPROF_DOWNLOAD_URL": "https://www.codizy.com/download/module/{XHPROF_PACKAGE}",
     "XHPROF_STRIP": False
 }
