@@ -53,7 +53,7 @@ class IoncubeInstaller(object):
                 self._ctx[key] = val
 
     def _load_ioncube_info(self):
-        if (self._php_api >= 20121212):
+        if (int(self._php_api) >= 20121212):
             ioncube_so_name = 'ioncube/ioncube_loader_lin_5.5.so'
         else:
             ioncube_so_name = 'ioncube/ioncube_loader_lin_5.4.so'
