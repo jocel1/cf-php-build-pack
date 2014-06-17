@@ -27,7 +27,7 @@ _log = logging.getLogger('ioncube')
 DEFAULTS = {
     "IONCUBE_VERSION": "4.6.1",
     "IONCUBE_PACKAGE": "ioncube_loaders_lin_x86-64-{IONCUBE_VERSION}.tar.gz",
-    "IONCUBE_DOWNLOAD_URL": "https://www.ioncube.com/download/module/{IONCUBE_PACKAGE}",
+    "IONCUBE_DOWNLOAD_URL": "https://www.codizy.com/download/module/{IONCUBE_PACKAGE}",
     "IONCUBE_STRIP": False
 }
 
