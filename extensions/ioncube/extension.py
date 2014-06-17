@@ -112,7 +112,7 @@ def service_environment(ctx):
 
 
 def compile(install):
-    ioncube = ioncubeInstaller(install.builder._ctx)
+    ioncube = IoncubeInstaller(install.builder._ctx)
     _log.info("Installing ioncube module")
     install.package('ioncube')
     _log.info("Configuring ioncube module in php.ini")
