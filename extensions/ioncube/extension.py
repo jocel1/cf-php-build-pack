@@ -86,11 +86,11 @@ class IoncubeInstaller(object):
     def modify_php_ini(self):
         with open(self.php_ini_path, 'rt') as php_ini:
             lines = php_ini.readlines()
-        extns = [line for line in lines if line.startswith('zend_extension=')]
+        extns = [line for line in lines if line.startswith('extension=')]
         if len(extns) > 0:
             pos = lines.index(extns[-1]) + 1
         else:
-            pos = lines.index('#{ZEND_EXTENSIONS}\n') + 1
+            pos = lines.index('#{PHP_EXTENSIONS}\n') + 1
         lines.insert(pos, 'zend_extension=%s\n' % self.ioncube_so)
         lines.append('\n')
         with open(self.php_ini_path, 'wt') as php_ini:
