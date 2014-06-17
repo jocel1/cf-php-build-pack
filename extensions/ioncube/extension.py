@@ -26,8 +26,8 @@ _log = logging.getLogger('ioncube')
 
 DEFAULTS = {
     "IONCUBE_VERSION": "4.6.1",
-    "IONCUBE_PACKAGE": "ioncube_loaders_lin_x86-64-{ioncube_VERSION}.tar.gz",
-    "IONCUBE_DOWNLOAD_URL": "https://www.ioncube.com/download/module/{ioncube_PACKAGE}",
+    "IONCUBE_PACKAGE": "ioncube_loaders_lin_x86-64-{IONCUBE_VERSION}.tar.gz",
+    "IONCUBE_DOWNLOAD_URL": "https://www.ioncube.com/download/module/{IONCUBE_PACKAGE}",
     "IONCUBE_STRIP": False
 }
 
@@ -66,7 +66,7 @@ class IoncubeInstaller(object):
                                          'php', 'etc', 'php.ini')
         self._php_extn_dir = self._find_php_extn_dir()
         self._php_api, self._php_zts = self._parse_php_api()
-        self._php_arch = self._ctx.get('ioncube_ARCH', 'x64')
+        self._php_arch = self._ctx.get('IONCUBE_ARCH', 'x64')
         self._log.info("PHP API [%s] Arch [%s]",
                         self._php_api, self._php_arch)
 
@@ -113,9 +113,9 @@ def service_environment(ctx):
 
 def compile(install):
     ioncube = IoncubeInstaller(install.builder._ctx)
-    _log.info("Installing ioncube module")
-    install.package('ioncube')
-    _log.info("Configuring ioncube module in php.ini")
+    _log.info("Installing Ioncube module")
+    install.package('IONCUBE')
+    _log.info("Configuring Ioncube module in php.ini")
     ioncube.modify_php_ini()
-    _log.info("ioncube module Installed.")
+    _log.info("Ioncube module Installed.")
     return 0
